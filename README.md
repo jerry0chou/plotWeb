@@ -1,0 +1,5 @@
+![image](https://github.com/jerry0chu/plotWeb/blob/master/plotPurchasing/display/1.png)
+![image](https://github.com/jerry0chu/plotWeb/blob/master/plotPurchasing/display/2.png)
+![image](https://github.com/jerry0chu/plotWeb/blob/master/plotPurchasing/display/3.png)
+![image](https://github.com/jerry0chu/plotWeb/blob/master/plotPurchasing/display/4.png)
+![image](https://github.com/jerry0chu/plotWeb/blob/master/plotPurchasing/display/5.png)
