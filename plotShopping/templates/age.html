@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script language="JavaScript" src="{% static "echarts.js" %}"></script>
+    <script type="application/javascript" src="{% static "jquery-1.11.1.min.js" %}"></script>
+    <title>画图</title>
+</head>
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+// 显示标题，图例和空的坐标轴
+        myChart.setOption({
+            title: {
+                text: '各年龄阶层的人群分布'
+            },
+            tooltip: {},
+            legend: {
+                data:['数量']
+            },
+            xAxis: {
+                data: []
+            },
+            yAxis: {},
+            series: [{
+                name: '数量',
+                type: 'bar',
+                data: []
+            }]
+        });
+
+        var dataSet = null;
+         $.post('{% url "age" %}').done(function (data) {
+        // 填入数据
+             var jsonstr = JSON.parse(data);
+             dataSet = $.parseJSON( jsonstr );
+            myChart.setOption({
+            xAxis: {
+                data: dataSet.labels
+            },
+            series: [{
+                // 根据名字对应到相应的系列
+                data: dataSet.data
+            }]
+            });
+        });
+
+    </script>
+
+
+
+
+</body>
+</html>

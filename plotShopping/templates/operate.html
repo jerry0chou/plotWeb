@@ -1,0 +1,97 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script language="JavaScript" src="{% static "echarts.js" %}"></script>
+    <script type="application/javascript" src="{% static "jquery-1.11.1.min.js" %}"></script>
+    <title>画性别比例图</title>
+</head>
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+// 显示标题，图例和空的坐标
+
+        var dataSet = null;
+         $.post('{% url "operate" %}').done(function (data) {
+        // 填入数据
+             var jsonstr = JSON.parse(data);
+             dataSet = $.parseJSON( jsonstr );
+            myChart.setOption({
+            title: {
+        text: '折线图堆叠'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['点击','加入购物车','购买','收藏']
+    },
+    grid: {
+{#        left: '3%',#}
+{#        right: '4%',#}
+{#        bottom: '3%',#}
+        containLabel: true
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none'
+            },
+            dataView: {readOnly: false},
+            magicType: {type: ['line', 'bar']},
+            restore: {},
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: dataSet.month
+    },
+    yAxis: {
+        type: 'value',
+{#        min:1750,#}
+{#        max:20000000,#}
+    },
+    series: [
+        {
+            name:'点击',
+            type:'line',
+            stack: '总量',
+            data:dataSet.click
+        },
+        {
+            name:'加入购物车',
+            type:'line',
+            stack: '总量',
+            data:dataSet.addCart
+        },
+        {
+            name:'购买',
+            type:'line',
+            stack: '总量',
+            data:dataSet.buy
+        },
+        {
+            name:'收藏',
+            type:'line',
+            stack: '总量',
+            data:dataSet.collect
+        },
+
+    ]
+
+            });
+        });
+
+    </script>
+
+
+
+
+</body>
+</html>
