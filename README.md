@@ -1,5 +1,5 @@
 ##### python=2.7
-#### pltPurchasing 是用flask和pandas构建的  
+#### pl0tPurchasing 是用flask和pandas构建的  
 ##### pip install flask pandas
 #### plotShopping 是用Django构建的
 ##### pip install django
